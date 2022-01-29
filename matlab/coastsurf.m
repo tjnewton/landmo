@@ -456,6 +456,7 @@ kk.LineStyle = 'none';
 %% N-S profiles
 % data map for profile selection
 figure
+load('washington_coastline.mat');
 coast = plot(washington_coastline(:,1),washington_coastline(:,2),'k', 'LineWidth', 2, 'DisplayName','Coastline')
 hold on
 scatter(longituderef, latituderef, 40, 'o', 'filled');
