@@ -5,15 +5,15 @@
 % washington_coastline.mat           - PNW coastline file
 % POI.xlsx               - points of interest for histograms
 % profiledata.xlsx       - list of points for velocity profiles
-% new.xlsx       - complete VLM dataset
+% vlm_data.xlsx       - complete VLM dataset
 % WAcoastline2dec.xlsx   - coastline points for interpolation
-% WAmodelpointsRay6.xlsx - model points
+% model_points.xlsx - model points (from tectonic locking model)
 
 % gridded model point generation
 close all
 clear all
 
-[num] = xlsread('WAmodelpointsRay6.xlsx'); % reads data file and imports all elements that are numbers
+[num] = xlsread('model_points.xlsx'); % reads data file and imports all elements that are numbers
 latitude = num(:, 2); 
 longitude = num(:, 1);
 velocity = num(:, 3);
@@ -56,14 +56,14 @@ interpVel = vq(rowy(1),colx(1));
 interpvelarray = vertcat(interpvelarray, interpVel);
 end
 catarray(:,3) = interpvelarray;
-% xlswrite('modeldata.xlsx',catarray);
+% xlswrite('model_data.xlsx',catarray);
 
 
 %% vertical velocity interpolation 
 close all
 clear all
 
-[num, txt, raw] = xlsread('new.xlsx'); % reads data file and imports all elements that are numbers and text
+[num, txt, raw] = xlsread('vlm_data.xlsx'); % reads data file and imports all elements that are numbers and text
 numNaN = any(isnan(num), 1); % finds NaN values in 'num'
 num(:, numNaN) = []; % deletes columns with NaN values in 'num'
 latlat = num(:, 2); 
@@ -94,7 +94,7 @@ latituderef = latitude;
 velocityref = velocity;
 uncertref = standardDeviation;
 
-[num, txt] = xlsread('modeldata.xlsx'); % reads model data
+[num, txt] = xlsread('model_data.xlsx'); % reads model data
 modellatitude = num(:, 2); 
 modellongitude = num(:, 1);
 modelvelocity = num(:, 3);
@@ -186,7 +186,7 @@ pbaspect([1 1 0.3])
 
 % plot with all data
 
-[num, txt] = xlsread('new.xlsx'); % reads data file and imports all elements that are numbers
+[num, txt] = xlsread('vlm_data.xlsx'); % reads data file and imports all elements that are numbers
 numNaN = any(isnan(num), 1); % finds NaN values in 'num'
 num(:, numNaN) = []; % deletes columns with NaN values in 'num'
 
@@ -211,7 +211,7 @@ latlonvel(:,2) = longitude6;
 latlonvel(:,3) = velocity6;
 
 
-[num] = xlsread('modeldata.xlsx');
+[num] = xlsread('model_data.xlsx');
 modellatitude = num(:, 2); 
 modellongitude = num(:, 1);
 modelvelocity = num(:, 3);
@@ -711,7 +711,7 @@ clear all
 format long
 tic
 
-[num, txt] = xlsread('new.xlsx'); % reads data file and imports all elements that are numbers
+[num, txt] = xlsread('vlm_data.xlsx'); % reads data file and imports all elements that are numbers
 numNaN = any(isnan(num), 1); % finds NaN values in 'num'
 num(:, numNaN) = []; % deletes columns with NaN values in 'num'
 
@@ -731,8 +731,8 @@ txt(1,:) = [];
 station = txt(:, 1); 
 type = txt(:, 6);
 
-% first insert uncertainty in 4th column of modeldata.xlsx file
-[num, txt] = xlsread('modeldata.xlsx');
+% first insert uncertainty in 4th column of model_data.xlsx file
+[num, txt] = xlsread('model_data.xlsx');
 modellatitude = num(:, 2); 
 modellongitude = num(:, 1);
 modelvelocity = num(:, 3);
