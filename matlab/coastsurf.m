@@ -1,6 +1,7 @@
 
 %% coastsurf.m
 % generates interpolated vertical land velocity and estimates uncertainty
+% 
 % required files:
 % washington_coastline.mat           - PNW coastline file
 % POI.xlsx               - points of interest for histograms
@@ -586,9 +587,11 @@ h = colorbar;
 caxis([-3 3])
 ylabel(h, 'Vertical Velocity (mm/yr)')
 pbaspect([1 1 1])
-zz = zeros(1,length(washington_coastline));
-zz = zz+6;
-plot3(washington_coastline(:,1),washington_coastline(:,2), zz,'k', 'LineWidth', 2, 'DisplayName','Coastline')
+load PNWcoast.dat;
+zz = zeros(1,length(PNWcoast));
+zz = zz+4;
+plot3(PNWcoast(:,1),PNWcoast(:,2), zz,'k', 'LineWidth', 2, 'DisplayName','Coastline')
+
 
 % difference figure 
 velocity4 = velocity3-velocity; % -1.5 to 2
