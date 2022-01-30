@@ -2,6 +2,13 @@
 %% coastsurf.m
 % generates interpolated vertical land velocity and estimates uncertainty
 % -------------------------------------------------------------------------
+% 
+% required toolboxes:
+% Statistics and Machine Learning Toolbox - for normrnd
+% others?
+% 
+% -------------------------------------------------------------------------
+% 
 % required files:
 % selectdata.m              - helper function from MATLAB file exchange
 % washington_coastline.mat  - coastline file
@@ -14,6 +21,7 @@
 % cas_slab2_dep_80.txt      - for plotting subducting slab contour at 80km
 % cas_slab2_dep_100.txt     - for plotting subducting slab contour at 100km
 % -------------------------------------------------------------------------
+% 
 % optional files:
 % POI.xlsx                  - to generate point of interest histograms
 % profiledata.xlsx          - list of points for velocity profiles
@@ -630,8 +638,8 @@ caxis([-1 1])
 ylabel(h, 'Vertical Velocity (mm/yr)')
 pbaspect([1 1 1])
 
-%% This sections generates figures showing cumulative vertical 
-% displacement in 2100 relative to 2017.
+%% This sections removes a N-S gradient signal (maybe GIA) and generates
+% figures showing cumulative vertical displacement in 2100 relative to 2017.
 
 cumu83 = velocity.*83;
 cumu83CM = cumu83./10;
@@ -715,8 +723,9 @@ caxis([-1.0 1.0])
 pbaspect([1 1 1])
 ylabel(h, 'Vertical Displacement (m)')
 %print(fig, '-dpdf', '-r3000')
-%% generates data for  profiles
+%% I don't remember what exactly this section is for. TBD
 
+% generates data for  profiles
 [num] = xlsread('profiledata.xlsx');
 latitude = num(:, 1); 
 longitude = num(:, 2);
@@ -729,7 +738,8 @@ interpVel = vq(rowy(1),colx(1));
 interpvelarray = vertcat(interpvelarray, interpVel);
 end
 
-%% estimate of uncertainty
+%% Generates estimate of bootstrapped uncertainty from data uncertainties.
+
 close all
 clear all
 format long
@@ -798,7 +808,7 @@ coastlongitude = washington_coastline(:, 1);
 % coastlatitude = wa_coastline_tenth(:, 2); 
 % coastlongitude = wa_coastline_tenth(:, 1);
 
-% loop through 1 million iterations
+% loop through 10000 iterations
 for i = 1:10000
 	% generates random numbers from normal distributions (with mean specified by the 
 	% values stored in *velocity* and the standard deviation specified by the values in *standardDeviation*)
@@ -829,16 +839,16 @@ saveme(:,1) = coastlongitude;
 saveme(:,2) = coastlatitude;
 saveme(:,3) = E(coastlongitude,coastlatitude);
 saveme(:,4) = coastUncertStd;
-%dlmwrite('coast_data_newCoastFile_NEW.txt', saveme, 'delimiter', ' ','precision',7)
-dlmwrite('interp_uncert_Water.txt', saveme, 'delimiter', ' ','precision',7)
+% dlmwrite('interp_uncert_Water.txt', saveme, 'delimiter', ' ','precision',7)
 
 U = scatteredInterpolant(coastlongitude, coastlatitude, coastUncertStd);
 uq = U(xq, yq);
 uq = abs(uq);
-arcgridwrite('arc_uncert_surf_Water.asc',xq(1,:),yq(:,1),uq);
+% arcgridwrite('arc_uncert_surf_Water.asc',xq(1,:),yq(:,1),uq);
 
 toc
-%% uncert fig
+%% Generates uncertainty figure.
+
 %saveme = load('coast_data_newCoastFile_NEW.txt');
 saveme = load('interp_uncert_Water.txt');
 coastlongitude = saveme(:,1);
