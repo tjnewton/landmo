@@ -18,7 +18,9 @@
 % POI.xlsx                  - to generate point of interest histograms
 % profiledata.xlsx          - list of points for velocity profiles
 
-% gridded model point generation
+%% This section takes in an xlsx file of vertical velocities from a
+% tectonic locking model and generates a grid of the modeled VLM data. 
+
 close all
 clear all
 
@@ -68,7 +70,9 @@ catarray(:,3) = interpvelarray;
 % xlswrite('model_data.xlsx',catarray);
 
 
-%% vertical velocity interpolation 
+%% This section takes in the gridded modeled VLM data from above and an 
+% xlsx file containing vertical velocity data (GNSS, leveling, tide gauge) 
+% then interpolates the data.
 close all
 clear all
 
