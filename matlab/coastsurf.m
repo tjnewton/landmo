@@ -456,8 +456,7 @@ kk.LineStyle = 'none';
 %% N-S profiles
 % data map for profile selection
 figure
-load('washington_coastline.mat');
-coast = plot(washington_coastline(:,1),washington_coastline(:,2),'k', 'LineWidth', 2, 'DisplayName','Coastline')
+coast = plot(PNWcoast(:,1),PNWcoast(:,2),'k', 'LineWidth', 2, 'DisplayName','Coastline');
 hold on
 scatter(longituderef, latituderef, 40, 'o', 'filled');
 pbaspect([1 1 1])
@@ -591,7 +590,6 @@ zz = zeros(1,length(washington_coastline));
 zz = zz+6;
 plot3(washington_coastline(:,1),washington_coastline(:,2), zz,'k', 'LineWidth', 2, 'DisplayName','Coastline')
 
-
 % difference figure 
 velocity4 = velocity3-velocity; % -1.5 to 2
 figure
@@ -631,7 +629,7 @@ ylabel(h, 'Vertical Displacement (m)')
 % figure for baseline gradient subtraction (GIA)
 %-123 to -122 averaging: vertical strip, mean taken horizontally, then
 %subtracted from model surface of same latitude
-[num] = xlsread('WAmodelpointsRay6.xlsx'); % reads data file and imports all elements that are numbers
+[num] = xlsread('model_points.xlsx'); % reads data file and imports all elements that are numbers
 latitudeLOC = num(:, 2); 
 longitudeLOC = num(:, 1);
 velocityLOC = num(:, 3);
