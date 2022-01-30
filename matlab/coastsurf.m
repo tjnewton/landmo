@@ -1,14 +1,22 @@
 
 %% coastsurf.m
 % generates interpolated vertical land velocity and estimates uncertainty
-% 
+% -------------------------------------------------------------------------
 % required files:
-% washington_coastline.mat           - PNW coastline file
-% POI.xlsx               - points of interest for histograms
-% profiledata.xlsx       - list of points for velocity profiles
-% vlm_data.xlsx       - complete VLM dataset
-% WAcoastline2dec.xlsx   - coastline points for interpolation
-% model_points.xlsx - model points (from tectonic locking model)
+% selectdata.m              - helper function from MATLAB file exchange
+% washington_coastline.mat  - coastline file
+% PNWcoast.dat              - coastline file
+% vlm_data.xlsx             - complete VLM dataset
+% model_points.xlsx         - model points (from tectonic locking model)
+% cas_slab2_dep_20.txt      - for plotting subducting slab contour at 20km
+% cas_slab2_dep_40.txt      - for plotting subducting slab contour at 40km
+% cas_slab2_dep_60.txt      - for plotting subducting slab contour at 60km
+% cas_slab2_dep_80.txt      - for plotting subducting slab contour at 80km
+% cas_slab2_dep_100.txt     - for plotting subducting slab contour at 100km
+% -------------------------------------------------------------------------
+% optional files:
+% POI.xlsx                  - to generate point of interest histograms
+% profiledata.xlsx          - list of points for velocity profiles
 
 % gridded model point generation
 close all
