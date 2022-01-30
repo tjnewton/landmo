@@ -195,10 +195,10 @@ pbaspect([1 1 0.3])
 %arcgridwrite('arc_vel_surf_new.asc',xq(1,:),yq(:,1),vq);
 %arcgridwrite('interpolated_vertical_velocity_0.01.asc',xq(1,:),yq(:,1),vq);
 
-%%
+%% This section generates figures to visualize the data and the 
+% interpolation.
 
-% plot with all data
-
+% load the vlm data
 [num, txt] = xlsread('vlm_data.xlsx'); % reads data file and imports all elements that are numbers
 numNaN = any(isnan(num), 1); % finds NaN values in 'num'
 num(:, numNaN) = []; % deletes columns with NaN values in 'num'
@@ -379,7 +379,12 @@ zz = zz+6;
 plot3(PNWcoast(:,1),PNWcoast(:,2), zz,'k', 'LineWidth', 2, 'DisplayName','Coastline')
 
 
-%% E-W profiles
+%% This section generates East-West profiles of data selected from a map.
+% When you run this section a map of data will be displayed and the program
+% will wait for you to select data to visualize. Click and drag a lasso
+% around the data of interest, then a E-W profile of that data will be
+% generated. This was useful for exploration during the data cleaning stage. 
+
 % data map for profile selection
 close all
 figure
@@ -466,7 +471,8 @@ jj = errorbar(profileLEVlongitude, profileLEVvelocity, profileLEVuncert, 'k','Ha
 jj.LineStyle = 'none';
 kk = errorbar(profileWLlongitude, profileWLvelocity, profileWLuncert, 'k','HandleVisibility','off');
 kk.LineStyle = 'none';
-%% N-S profiles
+%% Generates North-South profiles as above from the selected data.
+
 % data map for profile selection
 figure
 coast = plot(PNWcoast(:,1),PNWcoast(:,2),'k', 'LineWidth', 2, 'DisplayName','Coastline');
@@ -539,7 +545,9 @@ scatter(profileGPSlatitude, profileGPSvelocity, 70, '<', 'filled', 'MarkerEdgeCo
 scatter(profileLEVlatitude, profileLEVvelocity, 70, 's', 'filled', 'MarkerEdgeColor', 'k','DisplayName','Leveling')
 scatter(profileWLlatitude, profileWLvelocity, 130, 'd', 'filled', 'MarkerEdgeColor', 'k','DisplayName','WL')
 
-%%
+%% This section calculates differences in the interpolation with and
+% without the modeled VLM from the tectonic locking model points and 
+% generates figures to show the differences. 
 
 % generates data for coastline map
 
@@ -622,7 +630,9 @@ caxis([-1 1])
 ylabel(h, 'Vertical Velocity (mm/yr)')
 pbaspect([1 1 1])
 
-%% figure for cumulative vertical displacement in 2100, relative to 2017
+%% This sections generates figures showing cumulative vertical 
+% displacement in 2100 relative to 2017.
+
 cumu83 = velocity.*83;
 cumu83CM = cumu83./10;
 cumu83M = cumu83CM./100;
@@ -678,7 +688,7 @@ h = colorbar;
 caxis([-2 4])
 %pbaspect([1 1 1])
 ylabel(h, 'Vertical Velocity (mm/yr)')
-print(fig, '-dpdf', '-r3000')
+%print(fig, '-dpdf', '-r3000')
 
 x2q = xq.';
 y2q = yq.';
