@@ -14,3 +14,8 @@ status:
   - build notebooks with example workflow
   - build more robust interpolation method
   - generalize workflow to any area of interest
+
+## Contents
+#### ./matlab
+ - coastsurf.m - generates interpolated surface & bootstrapped uncertainty from vertical land motion data
+ - other files are VLM data or data for plotting coastlines/tectonics
