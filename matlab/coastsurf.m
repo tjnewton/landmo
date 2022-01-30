@@ -839,7 +839,7 @@ saveme(:,1) = coastlongitude;
 saveme(:,2) = coastlatitude;
 saveme(:,3) = E(coastlongitude,coastlatitude);
 saveme(:,4) = coastUncertStd;
-% dlmwrite('interp_uncert_Water.txt', saveme, 'delimiter', ' ','precision',7)
+dlmwrite('interp_uncert_Water.txt', saveme, 'delimiter', ' ','precision',7)
 
 U = scatteredInterpolant(coastlongitude, coastlatitude, coastUncertStd);
 uq = U(xq, yq);
