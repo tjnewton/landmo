@@ -16,6 +16,6 @@ status:
   - generalize workflow to any area of interest
 
 ## Contents
-#### ./matlab
+#### [./matlab](https://github.com/tjnewton/landmo/tree/main/matlab)
  - coastsurf.m - generates interpolated surface & bootstrapped uncertainty from vertical land motion data
  - other files are VLM data or data for plotting coastlines/tectonics
