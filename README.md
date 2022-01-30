@@ -5,7 +5,7 @@ Utilities to analyze land motion.
 
 
 status:  
- - uploading matlab scripts and data from [2018](https://cig.uw.edu/resources/special-reports/sea-level-rise-in-washington-state-a-2018-assessment) and [2021](https://doi.org/10.3390/w13030281) papers
+ - <s>uploading matlab scripts and data from [2018](https://cig.uw.edu/resources/special-reports/sea-level-rise-in-washington-state-a-2018-assessment) and [2021](https://doi.org/10.3390/w13030281) papers</s>
  - commenting, cleaning, and renaming these scripts
  
  
